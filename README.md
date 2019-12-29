@@ -1,23 +1,133 @@
 # vcommit
 
-### 配置文件
-##### types
-提交消息所允许的类型
+[![License](https://img.shields.io/npm/l/vcommit)](https://www.npmjs.org/package/vcommit)
+[![NPM Version](https://img.shields.io/npm/v/vcommit)](https://www.npmjs.org/package/vcommit)
 
-##### warnOnFail
-如果将此设置为true，错误将记录到控制台，但是提交仍将通过。
+Read this in other languages: English | [简体中文](./README_zh-CN.md)
 
-##### maxSubjectLength
-这将控制对象的最大长度。
+- [Installation](#installation)
+- [Usage](#Usage)
+- [Configuration](#Configuration)
+- [Licence](#Licence)
 
-##### subjectPattern
-接受一个RegExp来匹配提交消息主题。
+Validates that your commit message follows this format:
 
-##### subjectPatternErrorMsg
-如果提供subjectPattern，则在提交消息主题与模式不匹配时将显示此消息。
+``` bash
+<type>(<scope>): <subject>
+```
 
-##### helpMessage
-如果提供，则提交消息无效时将显示helpMessage字符串。
+Or without optional scope:
 
-##### autoFix
-如果将其设置为true，则类型将自动固定为所有小写，主题的首字母将小写，并且提交将通过（假设它没有其他问题）。
+``` bash
+<type>: <subject>
+```
+
+## Installation
+
+```bash
+npm install -g vcommit
+```
+
+## Usage
+```bash
+cd [your project]
+
+# init
+vcommit -s
+
+# generate CHANGELOG.md file
+npm run changelog
+# or 
+yarn run changelog
+```
+
+other options:
+
+```bash
+vcommit [options]
+
+-s, --setup    Generate project configuration.
+-V, --version  output the version number
+-h, --help     output usage information
+```
+
+## Configuration
+You can specify options in `.vcmrc`.
+It must be valid JSON file.
+The default configuration object is:
+
+```json
+{
+  "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"],
+  "scope": {
+    "required": false,
+    "allowed": ["*"],
+    "validate": false,
+    "multiple": false
+  },
+  "warnOnFail": false,
+  "maxSubjectLength": 100,
+  "subjectPattern": ".+",
+  "subjectPatternErrorMsg": "subject does not match subject pattern!",
+  "helpMessage": "",
+  "autoFix": false
+}
+```
+
+#### types
+
+These are the types that are allowed for your commit message. If omitted, the value is what is shown above.
+
+You can also specify: `"types": "*"` to indicate that you don't wish to validate types.
+
+#### scope
+
+This object defines scope requirements for the commit message. Possible properties are:
+
+##### 1. required
+
+A boolean to define whether a scope is required for all commit messages.
+
+##### 2. allowed
+
+An array of scopes that are allowed for your commit message.
+
+You may also define it as `"*"` which is the default to allow any scope names.
+
+##### 3. validate
+
+A boolean to define whether or not to validate the scope(s) provided.
+
+##### 4. multiple
+
+A boolean to define whether or not to allow multiple scopes.
+
+#### warnOnFail
+
+If this is set to `true` errors will be logged to the console, however the commit will still pass.
+
+#### maxSubjectLength
+
+This will control the maximum length of the subject.
+
+#### subjectPattern
+
+Optional, accepts a RegExp to match the commit message subject against.
+
+#### subjectPatternErrorMsg
+
+If `subjectPattern` is provided, this message will be displayed if the commit message subject does not match the pattern.
+
+#### helpMessage
+
+If provided, the helpMessage string is displayed when a commit message is not valid. This allows projects to provide a better developer experience for new contributors.
+
+The `helpMessage` also supports interpolating a single `%s` with the original commit message.
+
+#### autoFix
+
+If this is set to `true`, type will be auto fixed to all lowercase, subject first letter will be lowercased, and the commit will pass (assuming there's nothing else wrong with it).
+
+## License
+
+[MIT](https://github.com/iyolee/vcommit/blob/master/LICENSE)
