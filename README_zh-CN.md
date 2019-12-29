@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/npm/l/vcommit)](https://www.npmjs.org/package/vcommit)
 [![NPM Version](https://img.shields.io/npm/v/vcommit)](https://www.npmjs.org/package/vcommit)
 
-用其他语言阅读：[English](./Readme.md) | 简体中文
+用其他语言阅读：[English](./README.md) | 简体中文
 
 - [安装](#安装)
 - [使用](#使用)
