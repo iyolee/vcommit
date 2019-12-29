@@ -1,0 +1,48 @@
+{
+  "name": "vcommit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "vcommit": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iyolee/vcommit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iyolee/vcommit/issues"
+  },
+  "homepage": "https://github.com/iyolee/vcommit#readme",
+  "validate-commit-msg": {
+    "helpMessage": "\nPlease fix your commit message (and consider using http://npm.im/commitizen)\n",
+    "types": [
+      "feat",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "chore",
+      "revert",
+      "custom"
+    ],
+    "warnOnFail": false,
+    "autoFix": true
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^13.1.0",
+    "tslint": "^5.20.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.4"
+  }
+}
