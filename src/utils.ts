@@ -82,3 +82,8 @@ export function installPackage(install: string[], rootPath: string) {
     log(error('npm and yarn not exists'));
   }
 }
+
+export function pluckDeep(plainObj: object, keyPath: string) {
+  const pathToArr = keyPath.split('.');
+  return pathToArr.reduce((xs: any, x) => (xs && xs[x]) ? xs[x] : null, plainObj);
+}

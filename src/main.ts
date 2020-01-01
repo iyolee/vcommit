@@ -5,8 +5,8 @@ import {
   generateRcConfig,
   setConfigForPackage,
   error,
-  success,
 } from './utils';
+import * as shell from 'shelljs';
 
 import { INSTALL_PACKAGES } from './constant';
 
@@ -21,9 +21,6 @@ export class Vcommit {
     this.checkBeforeSetup();
     this.setupPackage();
     this.setupConfig();
-    log();
-    log(success('vcommit run successfully!'));
-    log();
   }
   private checkBeforeSetup() {
     const isGit = isExistFolderOrFile(this.rootDir, '.git');
@@ -49,6 +46,7 @@ export class Vcommit {
     });
     if (!install.length) return;
     installPackage(install, this.rootDir);
+    shell.exec('clear');
   }
   private setupConfig() {
     generateRcConfig(this.rootDir);

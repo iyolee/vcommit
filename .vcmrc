@@ -1,8 +1,20 @@
 {
-  "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "deps"],
+  "types": [
+    "feat",
+    "fix",
+    "docs",
+    "style",
+    "refactor",
+    "perf",
+    "test",
+    "chore",
+    "deps"
+  ],
   "scope": {
     "required": false,
-    "allowed": ["*"],
+    "allowed": [
+      "*"
+    ],
     "validate": false,
     "multiple": false
   },

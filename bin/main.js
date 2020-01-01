@@ -1,6 +1,14 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = require("./utils");
+var shell = __importStar(require("shelljs"));
 var constant_1 = require("./constant");
 var log = console.log;
 var Vcommit = /** @class */ (function () {
@@ -11,9 +19,6 @@ var Vcommit = /** @class */ (function () {
         this.checkBeforeSetup();
         this.setupPackage();
         this.setupConfig();
-        log();
-        log(utils_1.success('vcommit run successfully!'));
-        log();
     };
     Vcommit.prototype.checkBeforeSetup = function () {
         var isGit = utils_1.isExistFolderOrFile(this.rootDir, '.git');
@@ -42,6 +47,7 @@ var Vcommit = /** @class */ (function () {
         if (!install.length)
             return;
         utils_1.installPackage(install, this.rootDir);
+        shell.exec('clear');
     };
     Vcommit.prototype.setupConfig = function () {
         utils_1.generateRcConfig(this.rootDir);

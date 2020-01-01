@@ -92,3 +92,8 @@ function installPackage(install, rootPath) {
     }
 }
 exports.installPackage = installPackage;
+function pluckDeep(plainObj, keyPath) {
+    var pathToArr = keyPath.split('.');
+    return pathToArr.reduce(function (xs, x) { return (xs && xs[x]) ? xs[x] : null; }, plainObj);
+}
+exports.pluckDeep = pluckDeep;

@@ -10,7 +10,8 @@
     "build": "tsc --project tsconfig.json",
     "log": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "tslint": "tslint --project tsconfig.json",
-    "pre-commit": "npm run tslint"
+    "pre-commit": "npm run tslint",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "repository": {
     "type": "git",
@@ -37,9 +38,11 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.0.1",
+    "inquirer": "^7.0.1",
     "shelljs": "^0.8.3"
   },
   "devDependencies": {
+    "@types/inquirer": "^6.5.0",
     "@types/node": "^13.1.0",
     "@types/shelljs": "^0.8.6",
     "conventional-changelog-cli": "^2.0.31",
