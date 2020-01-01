@@ -13,6 +13,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var commander_1 = __importDefault(require("commander"));
 var inquirer_1 = __importDefault(require("inquirer"));
+var shell = __importStar(require("shelljs"));
 var path = __importStar(require("path"));
 var main_1 = require("./main");
 var utils_1 = require("./utils");
@@ -25,8 +26,16 @@ var vcommit = new main_1.Vcommit(rootDir);
 commander_1.default
     .usage('<command> [options]')
     .option('-s, --setup', 'generate project configuration.')
+    .option('-u, --upgrade', 'upgrade vcommit.')
     .version(version)
     .parse(process.argv);
+if (commander_1.default.upgrade) {
+    log();
+    log(utils_1.success('upgrade vcommit!'));
+    log();
+    shell.exec('sudo npm install -g vcommit');
+    process.exit(1);
+}
 if (isExistConfig || isExistRcFile) {
     inquirer_1.default.prompt([
         {
