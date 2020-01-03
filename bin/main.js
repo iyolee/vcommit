@@ -40,7 +40,7 @@ var Vcommit = /** @class */ (function () {
         if (!packageObject.devDependencies)
             packageObject.devDependencies = {};
         constant_1.INSTALL_PACKAGES.forEach(function (pack) {
-            if (!(pack in packageObject.dependencies || pack in packageObject.devDependencies)) {
+            if (!(pack in packageObject.dependencies && pack in packageObject.devDependencies)) {
                 install.push(pack);
             }
         });

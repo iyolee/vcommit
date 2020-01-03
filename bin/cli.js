@@ -58,3 +58,9 @@ if (isExistConfig || isExistRcFile) {
         }
     });
 }
+else {
+    vcommit.setup();
+    log();
+    log(utils_1.success('vcommit run successfully!'));
+    log();
+}

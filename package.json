@@ -1,6 +1,6 @@
 {
   "name": "vcommit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "verify git commit message.",
   "main": "main.js",
   "bin": {

@@ -40,7 +40,7 @@ export class Vcommit {
     if (!packageObject.dependencies) packageObject.dependencies = {};
     if (!packageObject.devDependencies) packageObject.devDependencies = {};
     INSTALL_PACKAGES.forEach((pack: string) => {
-      if (!(pack in packageObject.dependencies || pack in packageObject.devDependencies)) {
+      if (!(pack in packageObject.dependencies && pack in packageObject.devDependencies)) {
         install.push(pack);
       }
     });

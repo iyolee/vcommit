@@ -5,7 +5,7 @@ import inquirer from 'inquirer';
 import * as shell from 'shelljs';
 import * as path from 'path';
 import { Vcommit } from './main';
-import { getPackageObject, pluckDeep, isExistFolderOrFile, success } from './utils';
+import { getPackageObject, pluckDeep, isExistFolderOrFile, success, error } from './utils';
 
 const log = console.log;
 const version = getPackageObject(path.join(__dirname, '../')).version;
@@ -49,4 +49,9 @@ if (isExistConfig || isExistRcFile) {
       process.exit(1);
     }
   });
+} else {
+  vcommit.setup();
+  log();
+  log(success('vcommit run successfully!'));
+  log();
 }

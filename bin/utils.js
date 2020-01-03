@@ -49,6 +49,13 @@ function getConfigObject(rootDir, filename) {
         return null;
     }
 }
+function sniffPackageTools(rootDir) {
+    var isYarn = isExistFolderOrFile(rootDir, 'yarn.lock');
+    var isNpm = isExistFolderOrFile(rootDir, 'package-lock.json');
+    var isNpmTool = shell.which('npm');
+    var isYarnTool = shell.which('yarn');
+    return isNpm ? 'npm' : isYarn ? 'yarn' : isYarnTool ? 'yarn' : isNpmTool ? 'npm' : null;
+}
 function generateRcConfig(rootDir) {
     var data = JSON.stringify(getConfigObject(path.join(__dirname, '../'), constant_1.CONFIG_FILENAME), null, 2);
     generateFile(rootDir, constant_1.CONFIG_FILENAME, data);
@@ -75,10 +82,11 @@ function getPackageObject(rootDir) {
 exports.getPackageObject = getPackageObject;
 function installPackage(install, rootPath) {
     var cmd = '';
-    if (shell.which('yarn')) {
+    var tool = sniffPackageTools(rootPath);
+    if (tool === 'yarn') {
         cmd = "yarn add " + install.join(' ') + " --dev";
     }
-    else if (shell.which('npm')) {
+    else if (tool === 'npm') {
         cmd = "npm install -D " + install.join(' ');
     }
     if (cmd) {

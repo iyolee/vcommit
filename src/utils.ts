@@ -41,6 +41,14 @@ function getConfigObject(rootDir: string, filename: string): object | null {
   }
 }
 
+function sniffPackageTools(rootDir: string): 'yarn' | 'npm' | null {
+  const isYarn = isExistFolderOrFile(rootDir, 'yarn.lock');
+  const isNpm = isExistFolderOrFile(rootDir, 'package-lock.json');
+  const isNpmTool = shell.which('npm');
+  const isYarnTool = shell.which('yarn');
+  return isNpm ? 'npm' : isYarn ? 'yarn' : isYarnTool ? 'yarn' : isNpmTool ? 'npm' : null;
+}
+
 export function generateRcConfig(rootDir: string) {
   const data = JSON.stringify(
     getConfigObject(path.join(__dirname, '../'), CONFIG_FILENAME), null, 2);
@@ -67,9 +75,10 @@ export function getPackageObject(rootDir: string): IPackage {
 
 export function installPackage(install: string[], rootPath: string) {
   let cmd = '';
-  if (shell.which('yarn')) {
+  const tool = sniffPackageTools(rootPath);
+  if (tool === 'yarn') {
     cmd = `yarn add ${install.join(' ')} --dev`;
-  } else if (shell.which('npm')) {
+  } else if (tool === 'npm') {
     cmd = `npm install -D ${install.join(' ')}`;
   }
 
